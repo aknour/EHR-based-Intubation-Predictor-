@@ -1,4 +1,4 @@
-# EHR-based-Intubation-Predictor-
+# EHR-Based-Intubation-Predictor
 Open-source tool using electronic health records (EHR) data for predicting invasive mechanical ventilation. Timely assessments, transparent insights, and user-friendly interface.
 The EHR-Based Intubation Predictor is an open-source tool that leverages electronic health records (EHR) data to predict the need for invasive mechanical ventilation in patients. It utilizes machine learning algorithms and predictive modeling techniques to assist healthcare professionals in making timely and informed decisions related to patient management and resource allocation.
 
