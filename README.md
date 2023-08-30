@@ -1,14 +1,20 @@
-# EHR-Based-Intubation-Predictor
-Open-source tool using electronic health records (EHR) data for predicting invasive mechanical ventilation. Timely assessments, transparent insights, and user-friendly interface.
-The EHR-Based Intubation Predictor is an open-source tool that leverages electronic health records (EHR) data to predict the need for invasive mechanical ventilation in patients. It utilizes machine learning algorithms and predictive modeling techniques to assist healthcare professionals in making timely and informed decisions related to patient management and resource allocation.
+# Food Access Disparities Bay Area
+An in-depth analysis of food access disparities in the Bay Area, investigating the link between obesity rates and various determinants like geographic location, food deserts/swamps, income, and more. Using data science to spotlight and challenge deeply entrenched nutritional inequalities in the region.
 
-Features:
+An extensive data-driven exploration of food access disparities in California's Bay Area. This project delves into:
 
-Seamless integration with existing EHR systems for data extraction
-Predictive modeling based on comprehensive patient information
-Real-time predictions for assessing the risk of invasive mechanical ventilation
-Transparent and interpretable insights into prediction outcomes
-User-friendly interface for easy implementation and usage
+### - Geographical Analysis:
+Differentiating between urban and rural areas, mapping food desert and food swamp designations.
+### - Socio-Economic Indicators:
+Examining how factors such as income levels, race demographics, and vehicle access influence food accessibility.
+### - Health Indicators:
+Investigating correlations between obesity rates, physical inactivity, and access to exercise opportunities.
+### - Food Environment Index:
+A comprehensive metric providing insights into food choices and health outcomes.
+### - Deep Learning Predictor:
+Utilizing advanced machine learning to forecast demand for farmer's markets in various locations.
+### - Policy Implications:
+Insights to inform actionable strategies for better food systems and equitable access.
 
-This repository contains the source code, documentation, and resources for the EHR-Based Intubation Predictor. It aims to provide healthcare practitioners and researchers with an accessible and effective tool for identifying patients at higher risk of requiring invasive mechanical ventilation.
+## Drawn from my personal observations in the Bay Area, this analysis leverages data science to challenge and spotlight the root causes of nutritional inequalities in the region.
 
