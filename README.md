@@ -3,17 +3,17 @@ An in-depth analysis of food access disparities in the Bay Area, investigating t
 
 An extensive data-driven exploration of food access disparities in California's Bay Area. This project delves into:
 
-### - Geographical Analysis:
+###  Geographical Analysis:
 Differentiating between urban and rural areas, mapping food desert and food swamp designations.
-### - Socio-Economic Indicators:
+###  Socio-Economic Indicators:
 Examining how factors such as income levels, race demographics, and vehicle access influence food accessibility.
-### - Health Indicators:
+###  Health Indicators:
 Investigating correlations between obesity rates, physical inactivity, and access to exercise opportunities.
-### - Food Environment Index:
+###  Food Environment Index:
 A comprehensive metric providing insights into food choices and health outcomes.
-### - Deep Learning Predictor:
+###  Deep Learning Predictor:
 Utilizing advanced machine learning to forecast demand for farmer's markets in various locations.
-### - Policy Implications:
+###  Policy Implications:
 Insights to inform actionable strategies for better food systems and equitable access.
 
 ## Drawn from my personal observations in the Bay Area, this analysis leverages data science to challenge and spotlight the root causes of nutritional inequalities in the region.
