@@ -1,5 +1,5 @@
 # Food Access Disparities Bay Area
-### URL: https://medium.com/@aknour/access-and-obesity-unveiling-the-food-environment-of-urban-and-rural-america-734c00e267d5
+### PublicationURL: https://medium.com/@aknour/access-and-obesity-unveiling-the-food-environment-of-urban-and-rural-america-734c00e267d5
 An in-depth analysis of food access disparities in the Bay Area, investigating the link between obesity rates and various determinants like geographic location, food deserts/swamps, income, and more. Using data science to spotlight and challenge deeply entrenched nutritional inequalities in the region.
 
 An extensive data-driven exploration of food access disparities in California's Bay Area. This project delves into:
