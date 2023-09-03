@@ -1,1 +1,200 @@
+0.0.1 Hypothesis:
+Dietary habits, as captured in food_df, have a significant influence on specific body measurements
+as recorded in medical_df. By analyzing the distribution and relationship of specific nutrients or
+food groups with body metrics, we can derive insights into how diet impacts health indicators such
+as weight, height, and waist circumference.
+
+import os
+current_directory = os.getcwd()
+os.listdir(current_directory)
+
+import pandas as pd
+# Load the XPT files into dataframes
+food_file_path = "NCHSDietaryData.XPT"
+medical_file_path = "NCHSBodyMeasures.XPT"
+food_df = pd.read_sas(food_file_path)
+medical_df = pd.read_sas(medical_file_path)
+
+# View the first few rows of food_df
+print(food_df.head())
+# View the first few rows of medical_df
+print(medical_df.head())
+
+# Get information about food_df
+print(food_df.info())
+# Get information about medical_df
+print(medical_df.info())
+
+# Summary statistics for food_df
+print(food_df.describe())
+# Summary statistics for medical_df
+print(medical_df.describe())
+
+# Check for missing values in food_df
+print(food_df.isnull().sum())
+# Check for missing values in medical_df
+print(medical_df.isnull().sum())
+
+# Drop rows with missing values from food_df and medical_df
+#Another option is to impute the missing values using the median or mean of the␣
+↪column
+food_df.dropna(inplace=True)
+medical_df.dropna(inplace=True)
+
+# Example analysis - Calculate the mean of a specific column in food_df
+#mean_calories = food_df['Calories'].mean()
+#print("Mean Calories:", mean_calories)
+# Print the column names in food_df
+print(food_df.columns)
+
+# Calculate the mean of the 'Calories' column in food_df
+mean_calories = food_df['DR1IKCAL'].mean()
+print("Mean Calories:", mean_calories)
+
+ # Check for missing values in food_df
+missing_values_food = food_df.isnull().sum()
+print(missing_values_food)
+
+# Drop rows with missing values from the food_df DataFrame
+food_df_cleaned = food_df.dropna()
+# Check the shape of the cleaned DataFrame to see how many rows were removed
+print("Original Shape:", food_df.shape)
+print("Cleaned Shape:", food_df_cleaned.shape)
+
+
+# Calculate the mean of the 'DR1IKCAL' column in food_df
+mean_calories = food_df['DR1IKCAL'].mean()
+print("Mean Calories in food_df:", mean_calories)
+# Calculate the mean of the 'BMXWT' column in medical_df
+mean_weight = medical_df['BMXWT'].mean()
+print("Mean Weight in medical_df:", mean_weight)
+
+# Count the number of unique values in the 'DR1IGRMS' column in food_df
+unique_foods = food_df['DR1IGRMS'].nunique()
+print("Number of Unique Foods in food_df:", unique_foods)
+# Count the number of unique values in the 'BMDSTATS' column in medical_df
+unique_bmd_stats = medical_df['BMDSTATS'].nunique()
+print("Number of Unique BMD Stats in medical_df:", unique_bmd_stats)
+
+
+# Group food_df by the 'DRABF' column and calculate the mean of 'DR1IKCAL' for␣
+↪each group
+mean_calories_by_drabf = food_df.groupby('DRABF')['DR1IKCAL'].mean()
+print("Mean Calories by DRABF:\n", mean_calories_by_drabf)
+# Group medical_df by the 'BMDSTATS' column and calculate the median of 'BMXHT'␣
+↪for each group
+median_height_by_bmdstats = medical_df.groupby('BMDSTATS')['BMXHT'].median()
+print("Median Height by BMDSTATS:\n", median_height_by_bmdstats)
+
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+# Check if the 'BMXBMI' column exists in the DataFrame
+if 'BMXBMI' in medical_df.columns:
+# Check if the 'BMXBMI' column has non-null values
+if medical_df['BMXBMI'].notnull().any():
+# Set up the figure size
+plt.figure(figsize=(8, 6))
+# Create a box plot of BMI
+sns.boxplot(x='BMXBMI', data=medical_df)
+# Set the title and labels
+plt.title('Distribution of BMI')
+plt.xlabel('BMI')
+# Show the plot
+plt.show()
+else:
+print("The 'BMXBMI' column has no non-null values.")
+else:
+print("The 'BMXBMI' column does not exist in the DataFrame.")
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+# Define the subset of columns for correlation analysis
+selected_columns = [
+'DR1IKCAL', 'DR1IPROT', 'DR1ICARB', 'DR1ISUGR', 'DR1IFIBE',
+'DR1ITFAT', 'DR1ISFAT', 'DR1IMFAT', 'DR1IPFAT', 'DR1ICHOL',
+'DR1IVB1', 'DR1IVB2', 'DR1IVC', 'DR1IVD', 'DR1IVK'
+]
+# Create a correlation matrix for the selected columns
+subset_correlation_matrix = food_df[selected_columns].corr()
+# Set up the figure size
+plt.figure(figsize=(10, 8))
+# Create a heatmap with annotations
+sns.heatmap(subset_correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+# Set the title
+plt.title('Correlation Heatmap of Selected Nutrients')
+# Show the plot
+plt.show()
+
+
+import matplotlib.pyplot as plt
+# Check the first few rows of food_df
+print(food_df.head())
+# Check for null values in food_df
+print(food_df.isnull().sum())
+# Reset the index of food_df
+food_df.reset_index(drop=True, inplace=True)
+# Check data types of columns
+print(food_df.dtypes)
+# Check the data range of columns
+print(food_df.describe())
+# Check for duplicates in food_df
+print(food_df.duplicated().sum())
+# Example: Bar plot of average nutrient intake
+mean_nutrient_intake = food_df.mean()
+mean_nutrient_intake.plot(kind='bar', figsize=(10, 6))
+plt.title('Average Nutrient Intake')
+plt.xlabel('Nutrient')
+plt.ylabel('Mean Intake')
+plt.show()
+
+columns_of_interest = ['DR1IKCAL', 'DR1IPROT', 'DR1ICARB', 'DR1ISUGR',␣
+↪'DR1ITFAT']
+for column in columns_of_interest:
+unique_values = food_df[column].unique()
+print(f"Column: {column}\nUnique Values: {unique_values}\n")
+
+ nutrient_sources = ['Protein', 'Carbohydrate', 'Fat']
+# Find columns that match nutrient types
+matching_columns = []
+for nutrient in nutrient_sources:
+matching_column = [col for col in food_df.columns if nutrient.lower() in␣
+↪col.lower()]
+if matching_column:
+matching_columns.append(matching_column[0])
+print("Matching columns:", matching_columns)
+
+pip install geopandas
+pip install seaborn matplotlib
+
+# Display a sample of unique values in each column
+for column in food_df.columns:
+unique_values_sample = food_df[column].sample(5).tolist()
+print(f"Column: {column}")
+print(f"Unique Values Sample: {unique_values_sample}\n")
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+# List of potential column names for age group information
+age_group_columns = ['Age_Group', 'AGE_GROUP', 'AgeGroup', 'Age', 'Age_Groups']
+# Check which column is present in the DataFrame
+age_group_column = None
+for col in age_group_columns:
+if col in food_df.columns:
+age_group_column = col
+break
+# Check if age group column was found
+if age_group_column is None:
+print("No age group column found.")
+else:
+# Example: Distribution plot of calorie intake for different age groups
+sns.displot(data=food_df, x='DR1IKCAL', hue=age_group_column, kde=True)
+plt.title('Distribution of Calorie Intake by Age Group')
+plt.show()
+
+for col in food_df.columns:
+unique_values = food_df[col].unique()[:5] # Display the first 5 unique␣
+↪values for brevity
+print(f"Column: {col}\nUnique Values Sample: {unique_values}\n")
+
 
