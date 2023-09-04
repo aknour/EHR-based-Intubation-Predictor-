@@ -1,0 +1,132 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+#os is 'operating system' and .getcwd() gives you the current working directory
+import os
+print(os.getcwd())
+
+#.listdir() gives you a current list of the files and directories in your working directory
+import os
+print(os.listdir())
+
+import pandas as pd
+
+# Load the datasets
+HFA = pd.read_csv('HealthFoodAccessData(CSV) - FARA2019_06001405500.csv.csv')
+FEI = pd.read_csv('HealthFoodAccessData(FEI) - FoodEnvironmentIndex.csv')
+
+# Display the first few rows of each dataset
+print(HFA.head())
+print(FEI.head())
+
+# Display basic information about the dataset
+print("HFA Dataset Info:")
+print(HFA.info())
+
+# Display the first few rows of the dataset
+print("First Few Rows of HFA Dataset:")
+print(HFA.head())
+
+# Perform basic statistical analysis
+print("Statistical Summary of Numeric Columns:")
+print(HFA.describe())
+
+# Create a bar plot of the 'City' column
+HFA['City'].value_counts().plot(kind='bar', figsize=(10, 6))
+plt.title('Distribution of Cities in HFA Dataset')
+plt.xlabel('City')
+plt.ylabel('Count')
+plt.show()
+
+
+# Load the second dataset
+FEI = pd.read_csv('HealthFoodAccessData(FEI) - FoodEnvironmentIndex.csv')
+
+# Display basic information about the dataset
+print("FEI Dataset Info:")
+print(FEI.info())
+
+# Display the first few rows of the dataset
+print("First Few Rows of FEI Dataset:")
+print(FEI.head())
+
+# Perform basic statistical analysis
+print("Statistical Summary of Numeric Columns:")
+print(FEI.describe())
+
+# Sort the data
+sorted_data = FEI['% Limited Access to Healthy Foods'].sort_values()
+
+# Set the figure size
+plt.figure(figsize=(10, 6))
+
+# Create a bar plot of the sorted '% Limited Access to Healthy Foods' column
+sorted_data.value_counts().sort_index().plot(kind='bar')
+plt.title('Distribution of Limited Access to Healthy Foods')
+plt.xlabel('% Limited Access')
+plt.ylabel('Frequency')
+plt.xticks(rotation=45)
+plt.show()
+
+
+# Create a scatter plot of Population vs. Housing units
+plt.scatter(HFA['Population, tract total'], HFA['Housing units, total'])
+plt.title('Population vs. Housing Units')
+plt.xlabel('Population')
+plt.ylabel('Housing Units')
+plt.show()
+
+# Create a bar plot of Group quarters population share by City
+city_group_quarters = HFA.groupby('City')['Group quarters, tract population residing in, share'].mean()
+city_group_quarters.sort_values().plot(kind='bar', figsize=(12, 6))
+plt.title('Average Group Quarters Population Share by City')
+plt.xlabel('City')
+plt.ylabel('Average Group Quarters Population Share')
+plt.show()
+
+import matplotlib.pyplot as plt
+
+# Create a box plot of Z-scores by County without the first independent variable
+FEI_boxplot = FEI.boxplot(column='Z-score', by='County', figsize=(12, 6))
+plt.title('Box Plot of Z-scores by County')
+plt.xlabel('County')
+plt.ylabel('Z-score')
+
+# Get the x-axis tick labels
+tick_labels = [item.get_text() for item in FEI_boxplot.get_xticklabels()]
+
+# Remove the first tick label
+tick_labels[0] = ''
+
+# Set the modified tick labels
+FEI_boxplot.set_xticklabels(tick_labels)
+
+plt.xticks(rotation=90)
+plt.show()
+
+# Create a correlation heatmap of FEI dataset
+correlation_matrix_fei = FEI.corr()
+plt.figure(figsize=(12, 8))
+sns.heatmap(correlation_matrix_fei, annot=True, cmap='coolwarm')
+plt.title('Correlation Heatmap of FEI Dataset')
+plt.show()
+
+# Extract statistics for Z-scores by County
+stats_by_county = FEI.groupby('County')['Z-score'].describe()
+
+# Extracting potential outliers
+def find_outliers(row):
+    Q1 = row['25%']
+    Q3 = row['75%']
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+
+    outliers = FEI[(FEI['County'] == row.name) & ((FEI['Z-score'] < lower_bound) | (FEI['Z-score'] > upper_bound))]['Z-score'].values
+    return outliers
+
+stats_by_county['outliers'] = stats_by_county.apply(find_outliers, axis=1)
+
+# Display the statistics and potential outliers
+print(stats_by_county)
